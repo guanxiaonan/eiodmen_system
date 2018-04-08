@@ -2,10 +2,12 @@
 
 import Router from 'koa-router';
 
+import Myapp from '../controllers/myapp';
+
+import Myweb from '../controllers/myweb';
+
 import User from '../controllers/user';
-import Individual from '../controllers/individual';
-import Company from '../controllers/company';
-import Official from '../controllers/official';
+
 
 const router = new Router();
 
