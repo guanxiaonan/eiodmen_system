@@ -16,7 +16,7 @@ const app = new Koa();
 //session配置
 app.keys = ['eiodmen_system', 903];
 const CONFIG = {
-  key: 'diodmen_system',
+  key: 'eiodmen_system',
   maxAge: 3600000,
   overwrite: true,
   httpOnly: true,

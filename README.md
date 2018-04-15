@@ -12,6 +12,10 @@
 
 开始系统：
 
-首先，安装相关配置文件：npm install 
+首先，安装相关配置文件：npm install  
 
-之后，开启系统：npm start 
+之后，开启系统：npm start
+创建数据库：eiodmen_system,在此数据库下面建表 test_data。
+
+测试服务器是否成功： 网页输入：http://localhost:1803/test  
+                   如果页面出现： {"data":"hello world"}。表示服务器成功运行。
