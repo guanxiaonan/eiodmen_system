@@ -13,13 +13,23 @@
   <script type="text/javaScript">
       function doExport() {
 
-          $('#pdfstyles').tableExport({type:'pdf',
-                                       jspdf: {orientation: 'p',
-                                               margins: {right: 20, left: 20, top: 30, bottom: 30},
-                                               autotable: {styles: {fillColor: 'inherit',
-                                                                    textColor: 'inherit',
-                                                                    fontStyle: 'inherit'},
-                                                           tableWidth: 'wrap'}}});
+          // $('#pdfstyles').tableExport({type:'pdf',
+          //                              jspdf: {orientation: 'p',
+          //                                      margins: {right: 20, left: 20, top: 30, bottom: 30},
+          //                                      autotable: {styles: {fillColor: 'inherit',
+          //                                                           textColor: 'inherit',
+          //                                                           fontStyle: 'inherit'},
+          //                                                  tableWidth: 'wrap'}}});
+          $('#pdfalldata').tableExport({type:'excel'});
+      }
+      function doExportpdf() {
+        $('#pdfstyles').tableExport({type:'pdf',
+                                     jspdf: {orientation: 'p',
+                                             margins: {right: 20, left: 20, top: 30, bottom: 30},
+                                             autotable: {styles: {fillColor: 'inherit',
+                                                                  textColor: 'inherit',
+                                                                  fontStyle: 'inherit'},
+                                                         tableWidth: 'wrap'}}});
       }
   </script>
   <style type="text/css">
@@ -45,12 +55,13 @@
 </head>
 <body>
 
-<a href="#" onclick="doExport()">Export to PDF</a>
-<a href="/myweb/alldata" onclick="doExport()">显示所有数据</a>
+<a href="#" onclick="doExport()">Export to xls</a>
+<a href="#" onclick="doExportpdf()">Export to pdf</a>
+<a href="/myweb/alldata"">显示所有数据</a>
 <!-- <table id="pdfstyles"> -->
 <h5 class="sub-header"><input width="30"></input>（乡镇）街道<input></input>行政村处理设施巡查、检查记录表</h5>
 <div class="table-responsive">
-  <table class="table table-striped">
+  <table class="table table-striped" id="pdfalldata">
     <thead>
       <tr>
         <th>================</th>

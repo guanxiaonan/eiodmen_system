@@ -13,13 +13,23 @@
   <script type="text/javaScript">
       function doExport() {
 
-          $('#pdfstyles').tableExport({type:'pdf',
-                                       jspdf: {orientation: 'p',
-                                               margins: {right: 20, left: 20, top: 30, bottom: 30},
-                                               autotable: {styles: {fillColor: 'inherit',
-                                                                    textColor: 'inherit',
-                                                                    fontStyle: 'inherit'},
-                                                           tableWidth: 'wrap'}}});
+          // $('#pdfstyles').tableExport({type:'pdf',
+          //                              jspdf: {orientation: 'p',
+          //                                      margins: {right: 20, left: 20, top: 30, bottom: 30},
+          //                                      autotable: {styles: {fillColor: 'inherit',
+          //                                                           textColor: 'inherit',
+          //                                                           fontStyle: 'inherit'},
+          //                                                  tableWidth: 'wrap'}}});
+          $('#pdfstyles').tableExport({type:'excel'});
+      }
+      function doExportpdf() {
+        $('#pdfstyles').tableExport({type:'pdf',
+                                     jspdf: {orientation: 'p',
+                                             margins: {right: 20, left: 20, top: 30, bottom: 30},
+                                             autotable: {styles: {fillColor: 'inherit',
+                                                                  textColor: 'inherit',
+                                                                  fontStyle: 'inherit'},
+                                                         tableWidth: 'wrap'}}});
       }
   </script>
   <style type="text/css">
@@ -45,8 +55,9 @@
 </head>
 <body>
 <a href="/myweb/getperpar">获取数据</a>
-<a href="#" onclick="doExport()">Export to PDF</a>
-<a href="/myweb/alldata" onclick="doExport()">跳转详细数据页面</a>
+<a href="#" onclick="doExport()">Export to xls</a>
+<a href="#" onclick="doExportpdf()">Export to pdf</a>
+<a href="/myweb/alldata">跳转详细数据页面</a>
 <!-- <table id="pdfstyles"> -->
   <table id="pdfstyles" class="table table-striped">
     <thead>
