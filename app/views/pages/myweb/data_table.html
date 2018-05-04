@@ -5,32 +5,109 @@
   <title>数据显示</title>
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="/tableExport/libs/FileSaver/FileSaver.min.js"></script>
-  <script type="text/javascript" src="/tableExport/libs/jsPDF/jspdf.min.js"></script>
-  <script type="text/javascript" src="/tableExport/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
   <script type="text/javascript" src="/tableExport/tableExport.js"></script>
   <script src="/tableExport/build/pdfmake.min.js"></script>
   <script src="/tableExport/build/vfs_fonts.js"></script>
   <script type="text/javaScript">
-      function doExport() {
-
-          // $('#pdfstyles').tableExport({type:'pdf',
-          //                              jspdf: {orientation: 'p',
-          //                                      margins: {right: 20, left: 20, top: 30, bottom: 30},
-          //                                      autotable: {styles: {fillColor: 'inherit',
-          //                                                           textColor: 'inherit',
-          //                                                           fontStyle: 'inherit'},
-          //                                                  tableWidth: 'wrap'}}});
+      function doExport() {  //实现生成excel表格
           $('#pdfstyles').tableExport({type:'excel'});
       }
-      function doExportpdf() {
-        $('#pdfstyles').tableExport({type:'pdf',
-                                     jspdf: {orientation: 'p',
-                                             margins: {right: 20, left: 20, top: 30, bottom: 30},
-                                             autotable: {styles: {fillColor: 'inherit',
-                                                                  textColor: 'inherit',
-                                                                  fontStyle: 'inherit'},
-                                                         tableWidth: 'wrap'}}});
-      }
+      // function doExportpdf() {
+      //   $('#pdfstyles').tableExport({type:'pdf',
+      //                                escape:'false'});
+      // }
+
+    //   function pdfmake(content) {
+    //   var dd = content;
+    //   pdfMake.fonts = {
+    //     Roboto: {
+    //       normal: 'Roboto-Regular.ttf',
+    //       bold: 'Roboto-Medium.ttf',
+    //       italics: 'Roboto-Italic.ttf',
+    //       bolditalics: 'Roboto-Italic.ttf'
+    //     },
+    //     fzytk: {   //之后添加
+    //               normal: 'FZYTK.TTF',
+    //               bold: 'FZYTK.TTF',
+    //               italics: 'FZYTK.TTF',
+    //               bolditalics: 'FZYTK.TTF'
+    //           }
+    //   };
+    //   pdfMake.createPdf(dd).download("gyn-->导出的pdf",function(){
+    //
+    //   });
+    // }
+    function down() {
+      var n = <%= data_perpar.length %>;
+      alert(n);
+      // var data = data_perpar[1].id_preparation;
+      // alert("yunxing");
+      // var data_string = data.toString();
+    var dd = {
+
+      content: [
+
+        //表格1
+        {
+            style: 'tableExample',
+            table:{
+              widths: [30, 60, 80,  60, 60, 30],
+                body:[
+                    ['序号','巡查地点','巡查时间','巡查人员','终端名称','天气'],
+                ]
+            }
+        },
+        // for(var i=0;i<n;i++){
+        //   '输入n个数据！'
+        // }//for
+        //表格2
+        {
+            table: {
+              widths: [30, 60, 80,  60, 60, 30],
+                body: [
+
+                    // ['序号','巡查地点','巡查时间','巡查人员','终端名称','天气'],
+
+                    // [{text:'word',colSpan:2},'','',{text:'word',rowSpan:3}],
+                    // [{text:'word',colSpan:2,rowSpan:2},'','word',''],
+                    // ['','','word',''],
+
+                    [<%= data_perpar[0].id_preparation %>,'<%= data_perpar[0].stree+data_perpar[0].admin_village %>',
+                    '<%= data_perpar[0].date+data_perpar[0].shijian %>','<%= data_perpar[0].people %>','<%= data_perpar[0].terminal %>',
+                  '<%= data_perpar[0].weather %>'],
+                    [<%= data_perpar[1].id_preparation %>,'<%= data_perpar[1].stree+data_perpar[1].admin_village %>',
+                    '<%= data_perpar[1].date+data_perpar[1].shijian %>','<%= data_perpar[1].people %>','<%= data_perpar[1].terminal %>',
+                  '<%= data_perpar[1].weather %>']
+
+                ]
+            }
+        },  //table2
+
+
+       ],
+
+       defaultStyle: {
+         font: 'fzytk'
+       }
+    };
+    pdfMake.fonts = {
+      Roboto: {
+        normal: 'Roboto-Regular.ttf',
+        bold: 'Roboto-Medium.ttf',
+        italics: 'Roboto-Italic.ttf',
+        bolditalics: 'Roboto-Italic.ttf'
+      },
+      fzytk: {   //之后添加
+                normal: 'FZYTK.TTF',
+                bold: 'FZYTK.TTF',
+                italics: 'FZYTK.TTF',
+                bolditalics: 'FZYTK.TTF'
+            }
+    };
+    pdfMake.createPdf(dd).download("准备数据",function(){
+
+    });
+  }
   </script>
   <style type="text/css">
   <!--
@@ -56,7 +133,11 @@
 <body>
 <a href="/myweb/getperpar">获取数据</a>
 <a href="#" onclick="doExport()">Export to xls</a>
-<a href="#" onclick="doExportpdf()">Export to pdf</a>
+<a href="#" onclick="down()">Export to pdf</a>
+<!--
+/* <a href="#" onclick="doExportpdf()">Export to pdf</a> */
+/* <button class="btn btn-success" onClick ="$('#pdfstyles').tableExport({type: 'pdf', escape: 'false'});">CSV Export</button> */
+-->
 <a href="/myweb/alldata">跳转详细数据页面</a>
 <!-- <table id="pdfstyles"> -->
   <table id="pdfstyles" class="table table-striped">

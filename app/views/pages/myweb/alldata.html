@@ -11,25 +11,81 @@
   <script src="/tableExport/build/pdfmake.min.js"></script>
   <script src="/tableExport/build/vfs_fonts.js"></script>
   <script type="text/javaScript">
-      function doExport() {
-
-          // $('#pdfstyles').tableExport({type:'pdf',
-          //                              jspdf: {orientation: 'p',
-          //                                      margins: {right: 20, left: 20, top: 30, bottom: 30},
-          //                                      autotable: {styles: {fillColor: 'inherit',
-          //                                                           textColor: 'inherit',
-          //                                                           fontStyle: 'inherit'},
-          //                                                  tableWidth: 'wrap'}}});
+      function doExportExcel() {
           $('#pdfalldata').tableExport({type:'excel'});
       }
       function doExportpdf() {
-        $('#pdfstyles').tableExport({type:'pdf',
-                                     jspdf: {orientation: 'p',
-                                             margins: {right: 20, left: 20, top: 30, bottom: 30},
-                                             autotable: {styles: {fillColor: 'inherit',
-                                                                  textColor: 'inherit',
-                                                                  fontStyle: 'inherit'},
-                                                         tableWidth: 'wrap'}}});
+        alert("yunxing");
+
+        var dd = {
+          content: [
+            {text: ' ___________（乡镇）街道 ____________行政村处理设施巡查、检查记录表', style: 'subheader'},
+            //表格
+            {
+                style: 'tableExample',
+                table: {
+                  widths: [100, 100, 100,  100, 100, 100],
+                  headerRows: 1,
+                  // dontBreakRows: true,
+                  // keepWithHeaderRows: 1,
+                  body: [
+                    // [{text: '================', style: 'tableHeader'}, {text: '================', style: 'tableHeader'}, {text: '================', style: 'tableHeader'},{text: '================', style: 'tableHeader'}],
+                    ['巡查日期：', '', '天气：',''],
+                    ['自然村：', '', '总端名称：',''],
+                    ['巡查人员：', {text:'',colSpan:3}, {}],
+                    [{text:'巡查内容',colSpan:4,alignment: 'center'}, {}],
+                    ['处理工艺：', {text:'',colSpan:3}, {}],
+                    ['进水水量：', '', {text:'出水水量：',rowSpan:2},'外观：'],
+                    ['出水口:', '', '','臭气：'],
+                    [{text:'设备情况',colSpan:2,alignment: 'center'},{}, {text:'构筑物情况',colSpan:2,alignment: 'center'},{}],
+                    ['格珊：', '', '	集水井/调节池：',''],
+                    ['控制柜：', '', '	初沉池：',''],
+                    ['风机：', '', '厌氧池/兼氧池：',''],
+                    ['提升泵：', '', '好氧池：',''],
+                    ['回流泵：', '', '沉淀池：',''],
+                    ['流量计：', '', '人工湿地：',''],
+                    ['管道及阀门：', '', '	出水井：',''],
+                    ['控制房：', '', '终端场地：',''],
+                    ['液位控制系统：', '', '	终端围栏：',''],
+                    ['告示牌：', '', '各类井口及井盖：',''],
+                    ['在线监控设备：', '', '阀门井：',''],
+                    ['其他设备：', '', '其他设施：',''],
+                    [{text:'管网设施',colSpan:4,alignment: 'center'}, {}],
+                    ['管网：', '', '	窨井：',''],
+                    ['路面：', '', '窨井盖：',''],
+                    [{text:'接户设施',colSpan:4,alignment: 'center'}, {}],
+                    ['接户管：', '', '	接户井：',''],
+                    ['户用化粪池或隔油池:', '', '厨房清扫井：',''],
+                    ['道路：', {text:'',colSpan:3}, {}],
+                    ['其他问题：', {text:'',colSpan:3}, {}],
+
+                  ]
+                }
+            },
+
+          ],
+
+           defaultStyle: {
+             font: 'fzytk'
+           }
+        };
+        pdfMake.fonts = {
+          Roboto: {
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Medium.ttf',
+            italics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-Italic.ttf'
+          },
+          fzytk: {   //之后添加
+                    normal: 'FZYTK.TTF',
+                    bold: 'FZYTK.TTF',
+                    italics: 'FZYTK.TTF',
+                    bolditalics: 'FZYTK.TTF'
+                }
+        };
+        pdfMake.createPdf(dd).download("详细数据",function(){
+
+        });
       }
   </script>
   <style type="text/css">
@@ -55,7 +111,7 @@
 </head>
 <body>
 
-<a href="#" onclick="doExport()">Export to xls</a>
+<a href="#" onclick="doExportExcel()">Export to xls</a>
 <a href="#" onclick="doExportpdf()">Export to pdf</a>
 <a href="/myweb/alldata"">显示所有数据</a>
 <!-- <table id="pdfstyles"> -->

@@ -30,22 +30,24 @@ exports.main = async function(ctx, next){
 //weblogin
 exports.weblogin = async function(ctx, next){
   console.log("运行================");
+  let data_perpar = await knex.column().select().from('preparation'); //获取数据库表中所有的数据
   let data_user = ctx.request.body;
   console.log(data_user);
     // await ctx.redirect('/myweb/data_table')
     await ctx.render('pages/myweb/data_table', {   //默认后缀名为html
      title: '数据列表',
      user: ctx.session.user,
-     data_perpar:[]
+     data_perpar:data_perpar
    })
   }
 
   //data_table
   exports.data_table = async function(ctx,next){
+    let data_perpar = await knex.column().select().from('preparation'); //获取数据库表中所有的数据
     await ctx.render('pages/myweb/data_table', {   //默认后缀名为html
      title: '数据列表',
      user: ctx.session.user,
-     data_perpar:[]
+     data_perpar:data_perpar
    })
   }
 // testpdf
@@ -65,7 +67,7 @@ exports.getperpar = async function(ctx,next){
     await ctx.render('pages/myweb/data_table', {   //默认后缀名为html
      title: '数据列表',
      user: ctx.session.user,
-     data_perpar:data_perpar
+     data_perpar:data_perpar   //注意这个必须要写，要不然就会提示没有定义
    })
 }
 
@@ -80,5 +82,5 @@ exports.alldata = async function(ctx,next){
 // show_alldata
 exports.show_alldata = async function(ctx,next){
   console.log("====yunxing======");
-  
+
 }
